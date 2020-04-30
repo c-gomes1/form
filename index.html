@@ -14,6 +14,29 @@
 </html>
 <?php
 
+//An array of HTTP methods that
+//we want to allow.
+$allowedMethods = array(
+    'POST'
+);
+
+//The current request type.
+$requestMethod = strtoupper($_SERVER['REQUEST_METHOD']);
+
+
+//If the request method isn't in our
+//list of allowed methods.
+if(!in_array($requestMethod, $allowedMethods)){
+    //Send a 405 Method Not Allowed header.
+    header($_SERVER["SERVER_PROTOCOL"]." 405 Method Not Allowed", true, 405);
+    //Halt the script's execution.
+    exit;
+}
+
+//This will only be printed out if a
+//POST request is used.
+echo 'Hello world!';
+
 if(isset($_POST['textdata']))
 {
 $data=$_POST['textdata'];
